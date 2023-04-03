@@ -38,12 +38,12 @@ async function fetchEN() {
 
 async function main() {
   Promise.all([fetchCN()])
-    .then(([cn, en]) => {
-      fs.writeFile(FILE, JSON.stringify({ cn, en }));
+    .then(([cn]) => {
+      fs.writeFile(FILE, JSON.stringify({ cn }));
     })
     .catch((e) => {
       console.error("[Fetch] failed to fetch prompts");
-      fs.writeFile(FILE, JSON.stringify({ cn: [], en: [] }));
+      fs.writeFile(FILE, JSON.stringify({ cn: [] }));
     })
     .finally(() => {
       console.log("[Fetch] saved to " + FILE);

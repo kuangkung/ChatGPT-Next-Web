@@ -82,7 +82,7 @@ const cn = {
     Prompt: {
       Disable: {
         Title: "禁用提示词自动补全",
-        SubTitle: "在输入框开头输入 / 即可触发自动补全",
+        SubTitle: "在输入框开头输入「/」或「空格」即可触发自动补全",
       },
       List: "自定义提示词列表",
       ListCount: (builtin: number, custom: number) =>

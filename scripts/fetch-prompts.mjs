@@ -24,16 +24,7 @@ async function fetchCN() {
 
 async function fetchEN() {
   console.log("[Fetch] fetching en prompts...");
-  try {
-    const raw = await (await fetch(EN_URL)).text();
-    return raw
-      .split("\n")
-      .slice(1)
-      .map((v) => v.split('","').map((v) => v.replace('"', "")));
-  } catch (error) {
-    console.error("[Fetch] failed to fetch cn prompts", error);
-    return [];
-  }
+  return [];
 }
 
 async function main() {

@@ -1,12 +1,12 @@
 <div align="center">
 
-![主界面](./static/icon.svg)
+![主界面](./docs/images/icon.svg)
 
 <h1 align="center">ChatGPT Next Web</h1>
 
 一键免费部署你的私人 ChatGPT 网页应用。
 
-![主界面](./static/cover.png)
+![cover](./docs/images/cover.png)
 
 </div>
 
@@ -92,9 +92,9 @@ OPENAI_API_KEY=<your api key here>
 
 ## 截图 Screenshots
 
-![设置 Settings](./static/settings.png)
+![Settings](./docs/images/settings.png)
 
-![更多展示 More](./static/more.png)
+![More](./docs/images/more.png)
 
 ## LICENSE
 

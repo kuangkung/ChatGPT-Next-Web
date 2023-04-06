@@ -1,5 +1,6 @@
 <div align="center">
-<img src="./docs/images/icon.svg" alt="预览"/>
+
+![主界面](./docs/images/icon.svg)
 
 <h1 align="center">ChatGPT Next Web</h1>
 

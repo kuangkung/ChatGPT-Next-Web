@@ -26,7 +26,7 @@ import {
 import { Avatar } from "./chat";
 
 import Locale, { AllLangs, changeLang, getLang } from "../locales";
-import { getCurrentVersion } from "../utils";
+import { getCurrentVersion, getEmojiUrl } from "../utils";
 import Link from "next/link";
 import { UPDATE_URL } from "../constant";
 import { SearchService, usePromptStore } from "../store/prompt";
@@ -96,26 +96,17 @@ export function Settings(props: { closeSettings: () => void }) {
 
   const [usage, setUsage] = useState<{
     used?: number;
+    subscription?: number;
   }>();
   const [loadingUsage, setLoadingUsage] = useState(false);
   function checkUsage() {
     setLoadingUsage(true);
     requestUsage()
-      .then((res) =>
-        setUsage({
-          used: res,
-        }),
-      )
+      .then((res) => setUsage(res))
       .finally(() => {
         setLoadingUsage(false);
       });
   }
-
-  useEffect(() => {
-    checkUpdate();
-    checkUsage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const accessStore = useAccessStore();
   const enabledAccessControl = useMemo(
@@ -128,12 +119,13 @@ export function Settings(props: { closeSettings: () => void }) {
   const builtinCount = SearchService.count.builtin;
   const customCount = promptStore.prompts.size ?? 0;
 
-  const showUsage = accessStore.token !== "";
+  const showUsage = !!accessStore.token || !!accessStore.accessCode;
+
   useEffect(() => {
-    if (showUsage) {
-      checkUsage();
-    }
-  }, [showUsage]);
+    checkUpdate();
+    showUsage && checkUsage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -182,6 +174,7 @@ export function Settings(props: { closeSettings: () => void }) {
                 <EmojiPicker
                   lazyLoadEmojis
                   theme={EmojiTheme.AUTO}
+                  getEmojiUrl={getEmojiUrl}
                   onEmojiClick={(e) => {
                     updateConfig((config) => (config.avatar = e.unified));
                     setShowEmojiPicker(false);
@@ -373,6 +366,44 @@ export function Settings(props: { closeSettings: () => void }) {
           )}
 
           <SettingItem
+            title={Locale.Settings.Token.Title}
+            subTitle={Locale.Settings.Token.SubTitle}
+          >
+            <PasswordInput
+              value={accessStore.token}
+              type="text"
+              placeholder={Locale.Settings.Token.Placeholder}
+              onChange={(e) => {
+                accessStore.updateToken(e.currentTarget.value);
+              }}
+            />
+          </SettingItem>
+
+          <SettingItem
+            title={Locale.Settings.Usage.Title}
+            subTitle={
+              showUsage
+                ? loadingUsage
+                  ? Locale.Settings.Usage.IsChecking
+                  : Locale.Settings.Usage.SubTitle(
+                      usage?.used ?? "[?]",
+                      usage?.subscription ?? "[?]",
+                    )
+                : Locale.Settings.Usage.NoAccess
+            }
+          >
+            {!showUsage || loadingUsage ? (
+              <div />
+            ) : (
+              <IconButton
+                icon={<ResetIcon></ResetIcon>}
+                text={Locale.Settings.Usage.Check}
+                onClick={checkUsage}
+              />
+            )}
+          </SettingItem>
+
+          <SettingItem
             title={Locale.Settings.HistoryCount.Title}
             subTitle={Locale.Settings.HistoryCount.SubTitle}
           >
@@ -382,7 +413,7 @@ export function Settings(props: { closeSettings: () => void }) {
               value={config.historyMessageCount}
               min="0"
               max="25"
-              step="2"
+              step="1"
               onChange={(e) =>
                 updateConfig(
                   (config) =>

@@ -17,10 +17,10 @@ try {
 }
 
 export const metadata = {
-  title: "XianChen's AI assistant",
-  description: "Your personal ChatGPT Chat Bot.",
+  title: "AI Chat",
+  description: "An AI assistant build by Realshark via ChatGPT.",
   appleWebApp: {
-    title: "XianChen's AI assistant",
+    title: "AI Chat",
     statusBarStyle: "black-translucent",
   },
   themeColor: "#fafafa",

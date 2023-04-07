@@ -1,6 +1,6 @@
 {
-    "name": "XianChen's AI assistant",
-    "short_name": "ChatGPT",
+    "name": "AI Chat",
+    "short_name": "AI Chat",
     "icons": [
       {
         "src": "/android-chrome-192x192.png",
@@ -18,4 +18,3 @@
     "background_color": "#ffffff",
     "display": "standalone"
   }
-  

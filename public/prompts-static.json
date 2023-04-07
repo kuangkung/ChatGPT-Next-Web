@@ -1,7 +1,7 @@
 [
   {
     "act": "充当MidJourney Prompts生成器",
-    "prompt": "我想让你充当MidJourney Prompts生成器。"
+    "prompt": "我想让你充当MidJourney Prompts生成器\n"
   },
   {
     "act": "充当 Linux 终端",

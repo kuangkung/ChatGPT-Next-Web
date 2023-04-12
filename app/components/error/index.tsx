@@ -1,7 +1,7 @@
 import React from "react";
-import { IconButton } from "./button";
-import GithubIcon from "../icons/github.svg";
-import { ISSUE_URL } from "../constant";
+import { IconButton } from "../button";
+import GithubIcon from "@/app/icons/github.svg";
+import { ISSUE_URL } from "../../constant";
 
 interface IErrorBoundaryState {
   hasError: boolean;

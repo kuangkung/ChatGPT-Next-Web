@@ -1,5 +1,5 @@
-import DeleteIcon from "../icons/delete.svg";
-import styles from "./home.module.scss";
+import DeleteIcon from "@/app/icons/delete.svg";
+import styles from "../home.module.scss";
 import {
   DragDropContext,
   Droppable,
@@ -7,10 +7,10 @@ import {
   OnDragEndResponder,
 } from "@hello-pangea/dnd";
 
-import { useChatStore } from "../store";
+import { useChatStore } from "../../store";
 
-import Locale from "../locales";
-import { isMobileScreen } from "../utils";
+import Locale from "../../locales";
+import { isMobileScreen } from "../../utils";
 
 export function ChatItem(props: {
   onClick?: () => void;

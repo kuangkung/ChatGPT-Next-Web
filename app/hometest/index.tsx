@@ -8,7 +8,7 @@ import { IconButton } from "@/app/components/button";
 import styles from "./index.module.scss";
 
 import SettingsIcon from "@/app/icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
+import GithubIcon from "@/app/icons/github.svg";
 import ChatGptIcon from "@/app/icons/chatgpt.svg";
 
 import BotIcon from "@/app/icons/bot.svg";

@@ -4,26 +4,26 @@ require("../polyfill");
 
 import { useState, useEffect } from "react";
 
-import { IconButton } from "./button";
-import styles from "./home.module.scss";
+import { IconButton } from "@/app/components/button";
+import styles from "./index.module.scss";
 
-import SettingsIcon from "../icons/settings.svg";
+import SettingsIcon from "@/app/icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/chatgpt.svg";
+import ChatGptIcon from "@/app/icons/chatgpt.svg";
 
-import BotIcon from "../icons/bot.svg";
-import AddIcon from "../icons/add.svg";
-import LoadingIcon from "../icons/three-dots.svg";
-import CloseIcon from "../icons/close.svg";
+import BotIcon from "@/app/icons/bot.svg";
+import AddIcon from "@/app/icons/add.svg";
+import LoadingIcon from "@/app/icons/three-dots.svg";
+import CloseIcon from "@/app/icons/close.svg";
 
 import { useChatStore } from "../store";
 import { isMobileScreen } from "../utils";
 import Locale from "../locales";
-import { Chat } from "./chat";
+import { Chat } from "@/app/components/chat";
 
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
-import { ErrorBoundary } from "./error";
+import { ErrorBoundary } from "@/app/components/error";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -34,13 +34,19 @@ export function Loading(props: { noLogo?: boolean }) {
   );
 }
 
-const Settings = dynamic(async () => (await import("./settings")).Settings, {
-  loading: () => <Loading noLogo />,
-});
+const Settings = dynamic(
+  async () => (await import("@/app/components/settings")).Settings,
+  {
+    loading: () => <Loading noLogo />,
+  },
+);
 
-const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
-  loading: () => <Loading noLogo />,
-});
+const ChatList = dynamic(
+  async () => (await import("@/app/components/chat-list")).ChatList,
+  {
+    loading: () => <Loading noLogo />,
+  },
+);
 
 function useSwitchTheme() {
   const config = useChatStore((state) => state.config);

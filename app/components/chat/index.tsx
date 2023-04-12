@@ -1,16 +1,16 @@
 import { useDebouncedCallback } from "use-debounce";
 import { memo, useState, useRef, useEffect, useLayoutEffect } from "react";
 
-import SendWhiteIcon from "../icons/send-white.svg";
-import BrainIcon from "../icons/brain.svg";
-import ExportIcon from "../icons/export.svg";
-import ReturnIcon from "../icons/return.svg";
-import CopyIcon from "../icons/copy.svg";
-import DownloadIcon from "../icons/download.svg";
-import LoadingIcon from "../icons/three-dots.svg";
-import BotIcon from "../icons/bot.svg";
-import AddIcon from "../icons/add.svg";
-import DeleteIcon from "../icons/delete.svg";
+import SendWhiteIcon from "@/app/icons/send-white.svg";
+import BrainIcon from "@/app/icons/brain.svg";
+import ExportIcon from "@/app/icons/export.svg";
+import ReturnIcon from "@/app/icons/return.svg";
+import CopyIcon from "@/app/icons/copy.svg";
+import DownloadIcon from "@/app/icons/download.svg";
+import LoadingIcon from "@/app/icons/three-dots.svg";
+import BotIcon from "@/app/icons/bot.svg";
+import AddIcon from "@/app/icons/add.svg";
+import DeleteIcon from "@/app/icons/delete.svg";
 
 import {
   Message,
@@ -19,7 +19,7 @@ import {
   BOT_HELLO,
   ROLES,
   createMessage,
-} from "../store";
+} from "../../store";
 
 import {
   copyToClipboard,
@@ -27,22 +27,22 @@ import {
   getEmojiUrl,
   isMobileScreen,
   selectOrCopy,
-} from "../utils";
+} from "../../utils";
 
 import dynamic from "next/dynamic";
 
-import { ControllerPool } from "../requests";
-import { Prompt, usePromptStore } from "../store/prompt";
-import Locale from "../locales";
+import { ControllerPool } from "../../requests";
+import { Prompt, usePromptStore } from "../../store/prompt";
+import Locale from "../../locales";
 
-import { IconButton } from "./button";
-import styles from "./home.module.scss";
-import chatStyle from "./chat.module.scss";
+import { IconButton } from "../button";
+import styles from "../home.module.scss";
+import chatStyle from "./index.module.scss";
 
-import { Input, Modal, showModal, showToast } from "./ui-lib";
+import { Input, Modal, showModal, showToast } from "../ui-lib";
 
 const Markdown = dynamic(
-  async () => memo((await import("./markdown")).Markdown),
+  async () => memo((await import("../markdown")).Markdown),
   {
     loading: () => <LoadingIcon />,
   },

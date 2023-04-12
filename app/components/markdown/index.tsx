@@ -6,7 +6,7 @@ import RehypeKatex from "rehype-katex";
 import RemarkGfm from "remark-gfm";
 import RehypeHighlight from "rehype-highlight";
 import { useRef, useState, RefObject, useEffect } from "react";
-import { copyToClipboard } from "../utils";
+import { copyToClipboard } from "../../utils";
 
 export function PreCode(props: { children: any }) {
   const ref = useRef<HTMLPreElement>(null);
@@ -67,7 +67,7 @@ export function Markdown(props: { content: string }) {
       components={{
         pre: PreCode,
       }}
-      linkTarget={'_blank'}
+      linkTarget={"_blank"}
     >
       {props.content}
     </ReactMarkdown>

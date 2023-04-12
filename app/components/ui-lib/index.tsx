@@ -1,6 +1,6 @@
-import styles from "./ui-lib.module.scss";
-import LoadingIcon from "../icons/three-dots.svg";
-import CloseIcon from "../icons/close.svg";
+import styles from "./index.module.scss";
+import LoadingIcon from "@/app/icons/three-dots.svg";
+import CloseIcon from "@/app/icons/close.svg";
 import { createRoot } from "react-dom/client";
 import React from "react";
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import styles from "./button.module.scss";
+import styles from "./index.module.scss";
 
 export function IconButton(props: {
   onClick?: () => void;

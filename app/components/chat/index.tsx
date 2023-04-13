@@ -549,16 +549,17 @@ export function Chat(props: {
               onClick={props?.showSideBar}
             />
           </div>
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<BrainIcon />}
-              bordered
-              title={Locale.Chat.Actions.CompressedHistory}
-              onClick={() => {
-                setShowPromptModal(true);
-              }}
-            />
-          </div>
+          {/* 暂时隐藏前置上下文和历史记忆设置 */}
+          {/* <div className={styles["window-action-button"]}> */}
+          {/*   <IconButton */}
+          {/*     icon={<BrainIcon />} */}
+          {/*     bordered */}
+          {/*     title={Locale.Chat.Actions.CompressedHistory} */}
+          {/*     onClick={() => { */}
+          {/*       setShowPromptModal(true); */}
+          {/*     }} */}
+          {/*   /> */}
+          {/* </div> */}
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ExportIcon />}

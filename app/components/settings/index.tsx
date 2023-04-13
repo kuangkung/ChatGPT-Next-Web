@@ -38,9 +38,10 @@ function SettingItem(props: {
   title: string;
   subTitle?: string;
   children: JSX.Element;
+  forbidden?: boolean; //是否禁用
 }) {
   return (
-    <ListItem>
+    <ListItem forbidden={props.forbidden}>
       <div className={styles["settings-title"]}>
         <div>{props.title}</div>
         {props.subTitle && (
@@ -73,15 +74,21 @@ function PasswordInput(props: HTMLProps<HTMLInputElement>) {
 
 export function Settings(props: { closeSettings: () => void }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [config, updateConfig, resetConfig, clearAllData, clearSessions] =
-    useChatStore((state) => [
-      state.config,
-      state.updateConfig,
-      state.resetConfig,
-      state.clearAllData,
-      state.clearSessions,
-    ]);
-
+  const [
+    config,
+    updateConfig,
+    resetConfig,
+    clearAllData,
+    clearSessions,
+    isForbiddenHistory,
+  ] = useChatStore((state) => [
+    state.config,
+    state.updateConfig,
+    state.resetConfig,
+    state.clearAllData,
+    state.clearSessions,
+    state.config?.openBuildIn,
+  ]);
   const updateStore = useUpdateStore();
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const currentId = getCurrentVersion();
@@ -405,10 +412,11 @@ export function Settings(props: { closeSettings: () => void }) {
               />
             )}
           </SettingItem>
-
+          {/* 附带历史消息数量 */}
           <SettingItem
             title={Locale.Settings.HistoryCount.Title}
             subTitle={Locale.Settings.HistoryCount.SubTitle}
+            forbidden={isForbiddenHistory}
           >
             <InputRange
               title={config.historyMessageCount.toString()}

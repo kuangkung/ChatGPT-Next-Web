@@ -29,12 +29,24 @@ export function Card(props: { children: JSX.Element[]; className?: string }) {
   );
 }
 
-export function ListItem(props: { children: JSX.Element[] }) {
+export function ListItem(props: {
+  children: JSX.Element[];
+  forbidden?: boolean;
+}) {
   if (props.children.length > 2) {
     throw Error("Only Support Two Children");
   }
-
-  return <div className={styles["list-item"]}>{props.children}</div>;
+  return (
+    <>
+      {props?.forbidden ? (
+        <div className={styles["list-item-mask"]}>
+          <div className={styles["list-item"]}>{props.children}</div>
+        </div>
+      ) : (
+        <div className={styles["list-item"]}>{props.children}</div>
+      )}
+    </>
+  );
 }
 
 export function List(props: { children: JSX.Element[] | JSX.Element }) {

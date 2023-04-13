@@ -25,6 +25,13 @@
   height: 100vh;
 }
 
+//禁用遮罩
+.list-item-mask{
+  background: #e9ecef;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .list-item {
   display: flex;
   justify-content: space-between;

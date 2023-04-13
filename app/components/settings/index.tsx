@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, HTMLProps } from "react";
+import React, { useState, useEffect, useMemo, HTMLProps } from "react";
 
 import EmojiPicker, { Theme as EmojiTheme } from "emoji-picker-react";
 
@@ -140,6 +140,17 @@ export function Settings(props: { closeSettings: () => void }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //内置知识库改变回调
+  const changeInnerSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.currentTarget.checked;
+    updateConfig((config) => {
+      config.openBuildIn = checked; //开启内置知识库
+      if (checked) {
+        config.historyMessageCount = 0; //设置携带消息数为0;
+      }
+    });
+  };
 
   return (
     <ErrorBoundary>
@@ -310,6 +321,7 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
 
+          {/* 使用内置知识库 */}
           <SettingItem
             title={Locale.Settings.Prompt.UseBuildIn.Title}
             subTitle={Locale.Settings.Prompt.UseBuildIn.SubTitle}
@@ -317,11 +329,7 @@ export function Settings(props: { closeSettings: () => void }) {
             <input
               type="checkbox"
               checked={config.openBuildIn}
-              onChange={(e) =>
-                updateConfig(
-                  (config) => (config.openBuildIn = e.currentTarget.checked),
-                )
-              }
+              onChange={(e) => changeInnerSelect(e)}
             ></input>
           </SettingItem>
 

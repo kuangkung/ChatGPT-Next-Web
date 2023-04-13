@@ -91,6 +91,10 @@ const tw: LocaleType = {
         Title: "停用提示詞自動補全",
         SubTitle: "在輸入框開頭輸入 / 即可觸發自動補全",
       },
+      UseBuildIn: {
+        Title: "使用内置知識庫",
+        SubTitle: "設置答案以訪問內置知識庫範圍",
+      },
       List: "自定義提示詞列表",
       ListCount: (builtin: number, custom: number) =>
         `內置 ${builtin} 條，用戶定義 ${custom} 條`,

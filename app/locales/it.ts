@@ -93,6 +93,11 @@ const it: LocaleType = {
         Title: "Disabilita l'auto completamento",
         SubTitle: "Input / per attivare il completamento automatico",
       },
+      UseBuildIn: {
+        Title: "Usa la Knowledge Base Incorporata",
+        SubTitle:
+          "Imposta le risposte per accedere al campo di applicazione della Knowledge Base incorporata",
+      },
       List: "Elenco dei suggerimenti",
       ListCount: (builtin: number, custom: number) =>
         `${builtin} built-in, ${custom} user-defined`,

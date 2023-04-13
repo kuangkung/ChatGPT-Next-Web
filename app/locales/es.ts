@@ -93,6 +93,11 @@ const es: LocaleType = {
         Title: "Desactivar autocompletado",
         SubTitle: "Escribe / para activar el autocompletado",
       },
+      UseBuildIn: {
+        Title: "Usar Base de Conocimientos Incorporada",
+        SubTitle:
+          "Establezca respuestas para acceder al alcance de la base de conocimientos incorporada",
+      },
       List: "Lista de autocompletado",
       ListCount: (builtin: number, custom: number) =>
         `${builtin} incorporado, ${custom} definido por el usuario`,

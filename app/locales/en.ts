@@ -93,6 +93,10 @@ const en: LocaleType = {
         Title: "Disable auto-completion",
         SubTitle: "Input / to trigger auto-completion",
       },
+      UseBuildIn: {
+        Title: "Use Built-In Knowledge Base",
+        SubTitle: "Set Answers to Access Built-In Knowledge Base Scope",
+      },
       List: "Prompt List",
       ListCount: (builtin: number, custom: number) =>
         `${builtin} built-in, ${custom} user-defined`,

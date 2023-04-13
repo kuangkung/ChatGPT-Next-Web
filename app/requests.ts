@@ -119,7 +119,7 @@ export async function requestUsage() {
 
 export async function requestChatStreamABC(msg: any) {
   try {
-    const res = await fetch(`http://127.0.0.1:7860/prompt?message=${msg}`, {
+    const res = await fetch(`http://43.130.15.173:7860/prompt?message=${msg}`, {
       method: "GET",
       headers: {
         "Content-Type": "text/plain",

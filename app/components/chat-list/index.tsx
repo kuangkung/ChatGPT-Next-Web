@@ -1,5 +1,5 @@
 import DeleteIcon from "@/app/icons/delete.svg";
-import styles from "@/app/home/index.module.scss";
+import styles from "@/app/components/home/index.module.scss";
 import {
   DragDropContext,
   Droppable,

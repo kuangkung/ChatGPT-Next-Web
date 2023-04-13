@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import "@/app/styles/globals.scss";
+import "@/app/styles/markdown.scss";
+import "@/app/styles/highlight.scss";
 import process from "child_process";
 import { ACCESS_CODES, IS_IN_DOCKER } from "./api/access";
 

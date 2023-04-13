@@ -1,6 +1,6 @@
 "use client";
 
-require("../polyfill");
+require("../../polyfill");
 
 import { useState, useEffect } from "react";
 
@@ -16,9 +16,9 @@ import AddIcon from "@/app/icons/add.svg";
 import LoadingIcon from "@/app/icons/three-dots.svg";
 import CloseIcon from "@/app/icons/close.svg";
 
-import { useChatStore } from "../store";
-import { isMobileScreen } from "../utils";
-import Locale from "../locales";
+import { useChatStore } from "@/app/store";
+import { isMobileScreen } from "@/app/utils";
+import Locale from "@/app/locales";
 import { Chat } from "@/app/components/chat";
 
 import dynamic from "next/dynamic";

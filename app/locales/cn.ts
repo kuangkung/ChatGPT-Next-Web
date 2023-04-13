@@ -91,6 +91,10 @@ const cn = {
         Title: "禁用提示词自动补全",
         SubTitle: "在输入框开头输入 / 即可触发自动补全",
       },
+      UseBuildIn: {
+        Title: "使用内置知识库",
+        SubTitle: "回答访问设置为内建知识库范围",
+      },
       List: "自定义提示词列表",
       ListCount: (builtin: number, custom: number) =>
         `内置 ${builtin} 条，用户定义 ${custom} 条`,

@@ -180,6 +180,7 @@ export function Settings(props: { closeSettings: () => void }) {
         </div>
       </div>
       <div className={styles["settings"]}>
+        {/* 字体和主题 */}
         <List>
           <SettingItem title={Locale.Settings.Avatar}>
             <Popover
@@ -290,6 +291,8 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
         </List>
+
+        {/* 其他设置(提示词自动补全,自定义提示列表相关) */}
         <List>
           <SettingItem
             title={Locale.Settings.Prompt.Disable.Title}
@@ -307,6 +310,23 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
 
+          {/* <SettingItem */}
+          {/*     title={Locale.Settings.Prompt.UseBuildIn.Title} */}
+          {/*     subTitle={Locale.Settings.Prompt.UseBuildIn.SubTitle} */}
+          {/* > */}
+          {/*   <input */}
+          {/*       type="checkbox" */}
+          {/*       checked={config.openBuildIn} */}
+          {/*       onChange={(e) => */}
+          {/*           updateConfig( */}
+          {/*               (config) => */}
+          {/*                   (config.openBuildIn = e.currentTarget.checked), */}
+          {/*           ) */}
+          {/*       } */}
+          {/*   > */}
+          {/*   </input> */}
+          {/* </SettingItem> */}
+
           <SettingItem
             title={Locale.Settings.Prompt.List}
             subTitle={Locale.Settings.Prompt.ListCount(
@@ -321,6 +341,8 @@ export function Settings(props: { closeSettings: () => void }) {
             />
           </SettingItem>
         </List>
+
+        {/* 余额和访问限制 */}
         <List>
           {enabledAccessControl ? (
             <SettingItem
@@ -417,6 +439,7 @@ export function Settings(props: { closeSettings: () => void }) {
           </SettingItem>
         </List>
 
+        {/* gpt回复随机性 */}
         <List>
           <SettingItem
             title={Locale.Settings.Temperature.Title}

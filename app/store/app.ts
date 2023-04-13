@@ -55,6 +55,7 @@ export interface ChatConfig {
   sendPreviewBubble: boolean;
 
   disablePromptHint: boolean;
+  openBuildIn: boolean;
 
   modelConfig: {
     model: string;
@@ -143,6 +144,7 @@ const DEFAULT_CONFIG: ChatConfig = {
   sendPreviewBubble: false,
 
   disablePromptHint: false,
+  openBuildIn: true, //开启默认知识库
 
   modelConfig: {
     model: "gpt-3.5-turbo",

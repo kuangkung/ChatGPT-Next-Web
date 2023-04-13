@@ -405,6 +405,7 @@ export function Chat(props: {
 
   // submit user input
   const onUserSubmit = () => {
+    console.log("调用了我");
     if (userInput.length <= 0) return;
     setIsLoading(true);
     chatStore.onUserInput(userInput).then(() => setIsLoading(false));
@@ -514,6 +515,7 @@ export function Chat(props: {
 
   return (
     <div className={styles.chat} key={session.id}>
+      {/* 聊天详情数据(顶部) */}
       <div className={styles["window-header"]}>
         <div className={styles["window-header-title"]}>
           <div
@@ -574,6 +576,7 @@ export function Chat(props: {
         />
       </div>
 
+      {/* 对话数据 */}
       <div
         className={styles["chat-body"]}
         ref={scrollRef}
@@ -584,6 +587,7 @@ export function Chat(props: {
           setAutoScroll(false);
         }}
       >
+        {/* 循环对话数据 */}
         {messages.map((message, i) => {
           const isUser = message.role === "user";
 
@@ -661,8 +665,11 @@ export function Chat(props: {
         })}
       </div>
 
+      {/* 用户输入相关 */}
       <div className={styles["chat-input-panel"]}>
+        {/* 输入'/'的提示信息 */}
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
+        {/* 输入对话框 */}
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
             ref={inputRef}

@@ -1,0 +1,23 @@
+
+.search{
+  width: 300px;
+  display: flex;
+  align-content: center;
+  position: relative;
+  height: 40px;
+  background: red ;
+  &_input{
+    //border-radius: 20px;
+    padding-right: 40px;
+    max-width: 100% !important;
+    width: 100%;
+  }
+  &_icon{
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    padding: 0 10px;
+    display: flex;
+    right: 0;
+  }
+}

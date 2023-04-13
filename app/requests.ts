@@ -9,7 +9,7 @@ const makeRequestParam = (
   options?: {
     filterBot?: boolean;
     stream?: boolean;
-  }
+  },
 ): ChatRequest => {
   let sendMessages = messages.map((v) => ({
     role: v.role,
@@ -84,7 +84,7 @@ export async function requestUsage() {
 
   const [used, subs] = await Promise.all([
     requestOpenaiClient(
-      `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`
+      `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`,
     )(null, "GET"),
     requestOpenaiClient("dashboard/billing/subscription")(null, "GET"),
   ]);
@@ -124,7 +124,7 @@ export async function requestChatStream(
     onMessage: (message: string, done: boolean) => void;
     onError: (error: Error, statusCode?: number) => void;
     onController?: (controller: AbortController) => void;
-  }
+  },
 ) {
   const req = makeRequestParam(messages, {
     stream: true,
@@ -151,6 +151,7 @@ export async function requestChatStream(
 
     let responseText = "";
 
+    /* 完成回调 */
     const finish = () => {
       options?.onMessage(responseText, true);
       controller.abort();
@@ -158,12 +159,13 @@ export async function requestChatStream(
 
     if (res.ok) {
       const reader = res.body?.getReader();
+      console.log("reader", reader);
       const decoder = new TextDecoder();
 
       options?.onController?.(controller);
 
       while (true) {
-        // handle time out, will stop if no response in 10 secs
+        // handle time out, will stop if no response in 10 secs (处理超时，如果10秒内没有响应将停止)
         const resTimeoutId = setTimeout(() => finish(), TIME_OUT_MS);
         const content = await reader?.read();
         clearTimeout(resTimeoutId);
@@ -213,7 +215,7 @@ export const ControllerPool = {
   addController(
     sessionIndex: number,
     messageId: number,
-    controller: AbortController
+    controller: AbortController,
   ) {
     const key = this.key(sessionIndex, messageId);
     this.controllers[key] = controller;

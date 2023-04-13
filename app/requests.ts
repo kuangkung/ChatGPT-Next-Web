@@ -119,15 +119,12 @@ export async function requestUsage() {
 
 export async function requestChatStreamABC(msg: any) {
   try {
-    const res = await fetch(
-      `http://172.17.138.123:7860/prompt?message=${msg}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "text/plain",
-        },
+    const res = await fetch(`http://127.0.0.1:7860/prompt?message=${msg}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "text/plain",
       },
-    );
+    });
     /* 完成回调 */
     if (res.ok) {
       return await res.text().catch(() => msg);

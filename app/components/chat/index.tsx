@@ -46,7 +46,7 @@ const Markdown = dynamic(
   async () => memo((await import("../markdown")).Markdown),
   {
     loading: () => <LoadingIcon />,
-  },
+  }
 );
 
 const Emoji = dynamic(async () => (await import("emoji-picker-react")).Emoji, {
@@ -243,7 +243,7 @@ function PromptToast(props: {
                       onChange={() =>
                         chatStore.updateCurrentSession(
                           (session) =>
-                            (session.sendMemory = !session.sendMemory),
+                            (session.sendMemory = !session.sendMemory)
                         )
                       }
                     ></input>
@@ -363,7 +363,7 @@ export function Chat(props: {
       setPromptHints(promptStore.search(text));
     },
     100,
-    { leading: true, trailing: true },
+    { leading: true, trailing: true }
   );
 
   const onPromptSelect = (prompt: Prompt) => {
@@ -377,7 +377,7 @@ export function Chat(props: {
     if (!dom) return;
     const paddingBottomNum: number = parseInt(
       window.getComputedStyle(dom).paddingBottom,
-      10,
+      10
     );
     dom.scrollTop = dom.scrollHeight - dom.offsetHeight + paddingBottomNum;
   };
@@ -459,7 +459,7 @@ export function Chat(props: {
           .onUserInput(messages[i].content, openBuildIn)
           .then(() => setIsLoading(false));
         chatStore.updateCurrentSession((session) =>
-          session.messages.splice(i, 2),
+          session.messages.splice(i, 2)
         );
         inputRef.current?.focus();
         return;
@@ -492,7 +492,7 @@ export function Chat(props: {
               preview: true,
             },
           ]
-        : [],
+        : []
     )
     .concat(
       userInput.length > 0 && config.sendPreviewBubble
@@ -505,7 +505,7 @@ export function Chat(props: {
               preview: true,
             },
           ]
-        : [],
+        : []
     );
 
   const [showPromptModal, setShowPromptModal] = useState(false);
@@ -528,7 +528,7 @@ export function Chat(props: {
               const newTopic = prompt(Locale.Chat.Rename, session.topic);
               if (newTopic && newTopic !== session.topic) {
                 chatStore.updateCurrentSession(
-                  (session) => (session.topic = newTopic!),
+                  (session) => (session.topic = newTopic!)
                 );
               }
             }}
@@ -567,7 +567,7 @@ export function Chat(props: {
               onClick={() => {
                 exportMessages(
                   session.messages.filter((msg) => !msg.isError),
-                  session.topic,
+                  session.topic
                 );
               }}
             />
@@ -607,6 +607,7 @@ export function Chat(props: {
                 <div className={styles["chat-message-avatar"]}>
                   <Avatar role={message.role} />
                 </div>
+                {/* 处于流式状态,更改头像状态左边为'输入中...' */}
                 {(message.preview || message.streaming) && (
                   <div className={styles["chat-message-status"]}>
                     {Locale.Chat.Typing}
@@ -642,6 +643,7 @@ export function Chat(props: {
                       </div>
                     )}
 
+                  {/* 用户输入内容消息记录和机器人输入内容的Markdown body */}
                   {(message.preview || message.content.length === 0) &&
                   !isUser ? (
                     <LoadingIcon />

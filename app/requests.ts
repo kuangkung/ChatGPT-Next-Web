@@ -13,7 +13,8 @@ const makeRequestParam = (
 ): ChatRequest => {
   let sendMessages = messages.map((v) => ({
     role: v.role,
-    content: v.content,
+    //content: v.content,
+    content: v.afterContent ?? v.content,
   }));
 
   if (options?.filterBot) {
@@ -29,7 +30,7 @@ const makeRequestParam = (
   };
 };
 
-function getHeaders() {
+export function getHeaders() {
   const accessStore = useAccessStore.getState();
   let headers: Record<string, string> = {};
 
@@ -116,6 +117,27 @@ export async function requestUsage() {
   };
 }
 
+export async function requestChatStreamABC(msg: any) {
+  try {
+    const res = await fetch(
+      `http://172.17.138.123:7860/prompt?message=${msg}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      },
+    );
+    /* 完成回调 */
+    if (res.ok) {
+      return await res.text().catch(() => msg);
+    }
+  } catch (err) {
+    console.error("NetWork Error", err);
+    return msg;
+  }
+}
+
 export async function requestChatStream(
   messages: Message[],
   options?: {
@@ -195,6 +217,7 @@ export async function requestChatStream(
 }
 
 export async function requestWithPrompt(messages: Message[], prompt: string) {
+  console.log("调用了我,requestWithPrompt");
   messages = messages.concat([
     {
       role: "user",

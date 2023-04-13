@@ -310,22 +310,20 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
 
-          {/* <SettingItem */}
-          {/*     title={Locale.Settings.Prompt.UseBuildIn.Title} */}
-          {/*     subTitle={Locale.Settings.Prompt.UseBuildIn.SubTitle} */}
-          {/* > */}
-          {/*   <input */}
-          {/*       type="checkbox" */}
-          {/*       checked={config.openBuildIn} */}
-          {/*       onChange={(e) => */}
-          {/*           updateConfig( */}
-          {/*               (config) => */}
-          {/*                   (config.openBuildIn = e.currentTarget.checked), */}
-          {/*           ) */}
-          {/*       } */}
-          {/*   > */}
-          {/*   </input> */}
-          {/* </SettingItem> */}
+          <SettingItem
+            title={Locale.Settings.Prompt.UseBuildIn.Title}
+            subTitle={Locale.Settings.Prompt.UseBuildIn.SubTitle}
+          >
+            <input
+              type="checkbox"
+              checked={config.openBuildIn}
+              onChange={(e) =>
+                updateConfig(
+                  (config) => (config.openBuildIn = e.currentTarget.checked),
+                )
+              }
+            ></input>
+          </SettingItem>
 
           <SettingItem
             title={Locale.Settings.Prompt.List}

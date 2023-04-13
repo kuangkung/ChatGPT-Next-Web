@@ -40,6 +40,7 @@ import styles from "@/app/components/home/index.module.scss";
 import chatStyle from "./index.module.scss";
 
 import { Input, Modal, showModal, showToast } from "../ui-lib";
+import fetch from "node-fetch";
 
 const Markdown = dynamic(
   async () => memo((await import("../markdown")).Markdown),
@@ -405,10 +406,13 @@ export function Chat(props: {
 
   // submit user input
   const onUserSubmit = () => {
-    console.log("调用了我");
+    //console.log('on啊啊啊啊啊',process)
     if (userInput.length <= 0) return;
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+    const { openBuildIn } = chatStore.config;
+    chatStore
+      .onUserInput(userInput, openBuildIn)
+      .then(() => setIsLoading(false));
     setBeforeInput(userInput);
     setUserInput("");
     setPromptHints([]);
@@ -447,12 +451,13 @@ export function Chat(props: {
   };
 
   const onResend = (botIndex: number) => {
+    const { openBuildIn } = chatStore.config;
     // find last user input message and resend
     for (let i = botIndex; i >= 0; i -= 1) {
       if (messages[i].role === "user") {
         setIsLoading(true);
         chatStore
-          .onUserInput(messages[i].content)
+          .onUserInput(messages[i].content, openBuildIn)
           .then(() => setIsLoading(false));
         chatStore.updateCurrentSession((session) =>
           session.messages.splice(i, 2),

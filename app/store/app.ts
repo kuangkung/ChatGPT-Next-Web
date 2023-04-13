@@ -4,19 +4,23 @@ import { persist } from "zustand/middleware";
 import { type ChatCompletionResponseMessage } from "openai";
 import {
   ControllerPool,
+  getHeaders,
   requestChatStream,
+  requestChatStreamABC,
   requestWithPrompt,
 } from "../requests";
 import { isMobileScreen, trimTopic } from "../utils";
 
 import Locale from "../locales";
 import { showToast } from "../components/ui-lib";
+import fetch from "node-fetch";
 
 export type Message = ChatCompletionResponseMessage & {
   date: string;
   streaming?: boolean;
   isError?: boolean;
   id?: number;
+  afterContent?: string; //处理过后的消息
 };
 
 export function createMessage(override: Partial<Message>): Message {
@@ -144,7 +148,7 @@ const DEFAULT_CONFIG: ChatConfig = {
   sendPreviewBubble: false,
 
   disablePromptHint: false,
-  openBuildIn: true, //开启默认知识库
+  openBuildIn: false,
 
   modelConfig: {
     model: "gpt-3.5-turbo",
@@ -210,7 +214,7 @@ interface ChatStore {
   deleteSession: () => void;
   currentSession: () => ChatSession;
   onNewMessage: (message: Message) => void;
-  onUserInput: (content: string) => Promise<void>;
+  onUserInput: (content: string, isInner: boolean) => Promise<void>;
   summarizeSession: () => void;
   updateStat: (message: Message) => void;
   updateCurrentSession: (updater: (session: ChatSession) => void) => void;
@@ -370,12 +374,14 @@ export const useChatStore = create<ChatStore>()(
         get().summarizeSession();
       },
 
-      async onUserInput(content) {
+      async onUserInput(content, isInner) {
         const userMessage: Message = createMessage({
           role: "user",
-          content,
+          content: content,
+          afterContent: isInner
+            ? await requestChatStreamABC(content).catch(() => content)
+            : content,
         });
-
         const botMessage: Message = createMessage({
           role: "assistant",
           streaming: true,
@@ -383,11 +389,11 @@ export const useChatStore = create<ChatStore>()(
 
         // get recent messages
         const recentMessages = get().getMessagesWithMemory();
-        const sendMessages = recentMessages.concat(userMessage);
+        let sendMessages = recentMessages.concat(userMessage);
         const sessionIndex = get().currentSessionIndex;
         const messageIndex = get().currentSession().messages.length + 1;
 
-        // save user's and bot's message
+        // save user's and bot's message 保存机器人信息
         get().updateCurrentSession((session) => {
           session.messages.push(userMessage);
           session.messages.push(botMessage);

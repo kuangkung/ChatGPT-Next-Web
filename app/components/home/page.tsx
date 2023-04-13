@@ -110,7 +110,7 @@ function _Home() {
   useSwitchTheme();
 
   if (loading) {
-    return <Loading noLogo />;
+    return <Loading />;
   }
 
   return (

@@ -9,7 +9,7 @@ const makeRequestParam = (
   options?: {
     filterBot?: boolean;
     stream?: boolean;
-  },
+  }
 ): ChatRequest => {
   let sendMessages = messages.map((v) => ({
     role: v.role,
@@ -85,7 +85,7 @@ export async function requestUsage() {
 
   const [used, subs] = await Promise.all([
     requestOpenaiClient(
-      `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`,
+      `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`
     )(null, "GET"),
     requestOpenaiClient("dashboard/billing/subscription")(null, "GET"),
   ]);
@@ -119,7 +119,7 @@ export async function requestUsage() {
 
 export async function requestChatStreamABC(msg: any) {
   try {
-    const res = await fetch(`http://43.130.15.173:7860/prompt?message=${msg}`, {
+    const res = await fetch(`/embedding/prompt?message=${msg}`, {
       method: "GET",
       headers: {
         "Content-Type": "text/plain",
@@ -143,7 +143,7 @@ export async function requestChatStream(
     onMessage: (message: string, done: boolean) => void;
     onError: (error: Error, statusCode?: number) => void;
     onController?: (controller: AbortController) => void;
-  },
+  }
 ) {
   const req = makeRequestParam(messages, {
     stream: true,
@@ -235,7 +235,7 @@ export const ControllerPool = {
   addController(
     sessionIndex: number,
     messageId: number,
-    controller: AbortController,
+    controller: AbortController
   ) {
     const key = this.key(sessionIndex, messageId);
     this.controllers[key] = controller;

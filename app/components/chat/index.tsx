@@ -406,7 +406,6 @@ export function Chat(props: {
 
   // submit user input
   const onUserSubmit = () => {
-    //console.log('on啊啊啊啊啊',process)
     if (userInput.length <= 0) return;
     setIsLoading(true);
     const { openBuildIn } = chatStore.config;
@@ -614,6 +613,7 @@ export function Chat(props: {
                   </div>
                 )}
                 <div className={styles["chat-message-item"]}>
+                  {/* 鼠标放置hover效果 停止,复制,重试 */}
                   {!isUser &&
                     !(message.preview || message.content.length === 0) && (
                       <div className={styles["chat-message-top-actions"]}>
@@ -641,6 +641,7 @@ export function Chat(props: {
                         </div>
                       </div>
                     )}
+
                   {(message.preview || message.content.length === 0) &&
                   !isUser ? (
                     <LoadingIcon />

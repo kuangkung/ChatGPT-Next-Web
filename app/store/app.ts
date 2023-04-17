@@ -137,7 +137,7 @@ export const ModalConfigValidator = {
 };
 
 const DEFAULT_CONFIG: ChatConfig = {
-  historyMessageCount: 4,
+  historyMessageCount: 0,
   compressMessageLengthThreshold: 1000,
   sendBotMessages: true as boolean,
   submitKey: SubmitKey.Enter as SubmitKey,
@@ -148,7 +148,7 @@ const DEFAULT_CONFIG: ChatConfig = {
   sendPreviewBubble: false,
 
   disablePromptHint: false,
-  openBuildIn: false,
+  openBuildIn: true,
 
   modelConfig: {
     model: "gpt-3.5-turbo",

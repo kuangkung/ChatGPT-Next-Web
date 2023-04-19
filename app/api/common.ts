@@ -2,8 +2,10 @@ import { NextRequest } from "next/server";
 
 const OPENAI_URL = "api.openai.com";
 const DEFAULT_PROTOCOL = "https";
+const ENV_PARAMETERS = "api-version=2023-03-15-preview";
 const PROTOCOL = process.env.PROTOCOL ?? DEFAULT_PROTOCOL;
 const BASE_URL = process.env.BASE_URL ?? OPENAI_URL;
+const PARAMETERS = process.env.PARAMETERS ?? ENV_PARAMETERS;
 
 export async function requestOpenai(req: NextRequest) {
   const apiKey = req.headers.get("token");

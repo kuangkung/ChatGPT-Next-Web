@@ -61,7 +61,9 @@ export function requestOpenaiClient(path: string) {
 export async function requestChat(messages: Message[]) {
   const req: ChatRequest = makeRequestParam(messages, { filterBot: true });
 
-  const res = await requestOpenaiClient("v1/chat/completions")(req);
+  const res = await requestOpenaiClient("shark-chat35-turbo/chat/completions")(
+    req
+  );
 
   try {
     const response = (await res.json()) as ChatReponse;
@@ -160,7 +162,7 @@ export async function requestChatStream(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        path: "v1/chat/completions",
+        path: "shark-chat35-turbo/chat/completions",
         ...getHeaders(),
       },
       body: JSON.stringify(req),
